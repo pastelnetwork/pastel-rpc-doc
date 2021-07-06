@@ -62,14 +62,14 @@ func main() {
 	groups = append(groups, g)
 
 	tmpl := template.Must(template.ParseFiles("template.html"))
-	tmpl.Execute(open("../index.html"), Document{
+	tmpl.Execute(open("../static/index.html"), Document{
 		Command: nil,
 		Groups:  groups,
 	})
 
 	for _, group := range groups {
 		for _, command := range group.Commands {
-			tmpl.Execute(open("../"+command.Name+".html"), Document{
+			tmpl.Execute(open("../static/"+command.Name+".html"), Document{
 				Command: &command,
 				Groups:  groups,
 			})

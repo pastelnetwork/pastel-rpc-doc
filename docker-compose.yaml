@@ -4,7 +4,7 @@ services:
     image: nginx:alpine
     container_name: rpc_doc
     volumes:
-      - ./:/usr/share/nginx/html
+      - ./static/:/usr/share/nginx/html/
     ports:
       - 8866:80
     restart: always
