@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
+    <meta name="description" content="Pastel v1.0.0 RPC Docs{{if .Command}} - {{.Command.Name}}{{end}}">
+    <meta name="author" content="">
+
+    <title>{{if .Command}}{{.Command.Name}} - {{end}}Pastel v1.0.0 RPC Docs</title>
+    <link href="./bootstrap.min.css" rel="stylesheet">
+  </head>
+  <style>
+    .card-body {
+      font-size:80%;
+      padding-top: 0.5em;
+    }
+    pre {
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+  </style>
+
+  <body>
+
+    <nav class="navbar navbar-dark" style="background-color: #27251f">
+      <a class="navbar-brand" href="/">Pastel v1.0.0 RPC docs</a>
+    </nav>
+
+    <main role="main" class="container-fluid" style="margin-top: 1pc;">
+
+      <div class="row">
+        <div class="col-8 col-lg-9 col-xl-10">
+            <h1>{{if .Command}}{{.Command.Name}} - {{end}}Pastel v1.0.0 RPC</h1>
+          {{if .Command}}
+            <pre>{{.Command.Description}}</pre>
+            <hr>
+          {{end}}
+          <p>
+          Maintained by <a href="https://pastel.network">Pastel Network</a>; license of the docs is MIT (see <a href="https://github.com/pastelnetwork/pastel">pastel repo</a>)
+          </p>
+          <p>
+          Note it uses a mainnet node
+          </p>
+        </div>
+        <div class="col-4 col-lg-3 col-xl-2">
+          {{range .Groups}}
+            <div class="card">
+              <div class="card-header">
+                {{.Name}}
+              </div>
+              <div class="card-body">
+                {{range .Commands}}
+                  <a href="{{.Name}}.html">{{.Name}}</a>
+                  <br>
+                {{end}}
+              </div>
+            </div>
+            <br>
+          {{end}}
+        </div>  
+      </div>
+    </main>
+  </body>
+</html>		
