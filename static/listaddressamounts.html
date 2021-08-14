@@ -32,22 +32,23 @@
         <div class="col-8 col-lg-9 col-xl-10">
             <h1>listaddressamounts - Pastel v1.0.0 RPC</h1>
           
-            <pre>listaddressamounts (includeempty)
+            <pre>listaddressamounts (includeEmpty ismineFilter)
 
-Lists balance on each addresses
+Lists balance on each address
 
 Arguments:
-1. includeempty  (numeric, optional, default=false) Whether to include addresses with empty balance.
+1. includeEmpty   (numeric, optional, default=false) Whether to include addresses with empty balance.
+2. ismineFilter   (string, optional, default=all) Whether to include &#34;all&#34;, &#34;watchOnly&#34; or &#34;spendableOnly&#34; addresses.
 
 Result:
-  &#34;zcashaddress&#34;,     (string) The Pastel address
-  amount,               (numeric) The amount in PSL
+  &#34;zcashaddress&#34;, (string)  The Pastel address
+   amount,        (numeric) The amount in PSL
 
 Examples:
 &gt; pastel-cli listaddressamounts 
-&gt; pastel-cli listaddressamounts true
+&gt; pastel-cli listaddressamounts true spendableOnly
 &gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;listaddressamounts&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:9932/
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;listaddressamounts&#34;, &#34;params&#34;: [true] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:9932/
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;listaddressamounts&#34;, &#34;params&#34;: [true spendableOnly] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:9932/
 
 </pre>
             <hr>
@@ -60,6 +61,19 @@ Examples:
           </p>
         </div>
         <div class="col-4 col-lg-3 col-xl-2">
+          
+            <div class="card">
+              <div class="card-header">
+                Addressindex
+              </div>
+              <div class="card-body">
+                
+                  <a href="getaddressmempool.html">getaddressmempool</a>
+                  <br>
+                
+              </div>
+            </div>
+            <br>
           
             <div class="card">
               <div class="card-header">
@@ -77,6 +91,9 @@ Examples:
                   <br>
                 
                   <a href="getblockcount.html">getblockcount</a>
+                  <br>
+                
+                  <a href="getblockdeltas.html">getblockdeltas</a>
                   <br>
                 
                   <a href="getblockhash.html">getblockhash</a>
@@ -123,6 +140,9 @@ Examples:
               <div class="card-body">
                 
                   <a href="getinfo.html">getinfo</a>
+                  <br>
+                
+                  <a href="getmemoryinfo.html">getmemoryinfo</a>
                   <br>
                 
                   <a href="help.html">help</a>
@@ -214,6 +234,9 @@ Examples:
               <div class="card-body">
                 
                   <a href="chaindata.html">chaindata</a>
+                  <br>
+                
+                  <a href="governance.html">governance</a>
                   <br>
                 
                   <a href="%22ingest%22.html">&#34;ingest&#34;</a>
@@ -481,6 +504,9 @@ Examples:
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
                   <br>
                 
+                  <a href="z_getnotescount.html">z_getnotescount</a>
+                  <br>
+                
                   <a href="z_getoperationresult.html">z_getoperationresult</a>
                   <br>
                 
@@ -517,7 +543,13 @@ Examples:
                   <a href="z_sendmany.html">z_sendmany</a>
                   <br>
                 
+                  <a href="z_sendmanywithchangetosender.html">z_sendmanywithchangetosender</a>
+                  <br>
+                
                   <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>
+                  <br>
+                
+                  <a href="z_viewtransaction.html">z_viewtransaction</a>
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>

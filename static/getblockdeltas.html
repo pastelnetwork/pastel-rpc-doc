@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Pastel v1.0.0 RPC Docs - move">
+    <meta name="description" content="Pastel v1.0.0 RPC Docs - getblockdeltas">
     <meta name="author" content="">
 
-    <title>move - Pastel v1.0.0 RPC Docs</title>
+    <title>getblockdeltas - Pastel v1.0.0 RPC Docs</title>
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
   <style>
@@ -30,32 +30,60 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>move - Pastel v1.0.0 RPC</h1>
+            <h1>getblockdeltas - Pastel v1.0.0 RPC</h1>
           
-            <pre>move &#34;fromaccount&#34; &#34;toaccount&#34; amount ( minconf &#34;comment&#34; )
+            <pre>getblockdeltas blockhash
+Returns the txid and index where an output is spent.
+WARNING: getblockdeltas is disabled.
+To enable it, restart zcashd with the -experimentalfeatures and
+-insightexplorer commandline options, or add these two lines
+to the zcash.conf file:
 
-DEPRECATED. Move a specified amount from one account in your wallet to another.
-
+experimentalfeatures=1
+insightexplorer=1
 Arguments:
-1. &#34;fromaccount&#34;   (string, required) MUST be set to the empty string &#34;&#34; to represent the default account. Passing any other string will result in an error.
-2. &#34;toaccount&#34;     (string, required) MUST be set to the empty string &#34;&#34; to represent the default account. Passing any other string will result in an error.
-3. amount            (numeric) Quantity of PSL to move between accounts.
-4. minconf           (numeric, optional, default=1) Only use funds with at least this many confirmations.
-5. &#34;comment&#34;       (string, optional) An optional comment, stored in the wallet only.
-
+1. &#34;hash&#34;          (string, required) The block hash
 Result:
-true|false           (boolean) true if successful.
-
-Examples:
-
-Move 0.01 PSL from the default account to the account named tabby
-&gt; pastel-cli move &#34;&#34; &#34;tabby&#34; 0.01
-
-Move 0.01 PSL timotei to akiko with a comment and funds have 6 confirmations
-&gt; pastel-cli move &#34;timotei&#34; &#34;akiko&#34; 0.01 6 &#34;happy birthday!&#34;
-
-As a json rpc call
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;move&#34;, &#34;params&#34;: [&#34;timotei&#34;, &#34;akiko&#34;, 0.01, 6, &#34;happy birthday!&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:9932/
+{
+  &#34;hash&#34;: &#34;hash&#34;,              (string) block ID
+  &#34;confirmations&#34;: n,          (numeric) number of confirmations
+  &#34;size&#34;: n,                   (numeric) block size in bytes
+  &#34;height&#34;: n,                 (numeric) block height
+  &#34;version&#34;: n,                (numeric) block version (e.g. 4)
+  &#34;merkleroot&#34;: &#34;hash&#34;,        (string) block Merkle root
+  &#34;deltas&#34;: [
+    {
+      &#34;txid&#34;: &#34;hash&#34;,          (string) transaction ID
+      &#34;index&#34;: n,              (numeric) tx index in block
+      &#34;inputs&#34;: [
+        {
+          &#34;address&#34;: &#34;taddr&#34;,  (string) transparent address
+          &#34;patoshis&#34;: n,       (numeric) negative of spend amount
+          &#34;index&#34;: n,          (numeric) vin index
+          &#34;prevtxid&#34;: &#34;hash&#34;,  (string) source utxo tx ID
+          &#34;prevout&#34;: n         (numeric) source utxo index
+        }, ...
+      ],
+      &#34;outputs&#34;: [
+        {
+          &#34;address&#34;: &#34;taddr&#34;,  (string) transparent address
+          &#34;patoshis&#34;: n,       (numeric) amount
+          &#34;index&#34;: n           (numeric) vout index
+        }, ...
+      ]
+    }, ...
+  ],
+  &#34;time&#34;: n,                   (numeric) The block version
+  &#34;mediantime&#34;: n,             (numeric) The most recent blocks&#39; ave time
+  &#34;nonce&#34;: &#34;hexstring&#34;,        (hex string) The nonce
+  &#34;bits&#34;: &#34;hexstring&#34;,         (hex string) The bits
+  &#34;difficulty&#34;: ,              (numeric) the current difficulty
+  &#34;chainwork&#34;: &#34;hexstring&#34;,    (hex string) total amount of work in active chain
+  &#34;previousblockhash&#34;: &#34;hash&#34;, (hex string) The hash of the previous block
+  &#34;nextblockhash&#34;: &#34;hash&#34;      (hex string) The hash of the next block
+}
+Examples:&gt; pastel-cli getblockdeltas 00227e566682aebd6a7a5b772c96d7a999cadaebeaf1ce96f4191a3aad58b00b
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getblockdeltas&#34;, &#34;params&#34;: [&#34;00227e566682aebd6a7a5b772c96d7a999cadaebeaf1ce96f4191a3aad58b00b&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:9932/
 
 </pre>
             <hr>

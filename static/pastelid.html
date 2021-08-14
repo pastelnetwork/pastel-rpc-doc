@@ -33,22 +33,23 @@
             <h1>pastelid - Pastel v1.0.0 RPC</h1>
           
             <pre>pastelid &#34;command&#34;...
-Set of commands to deal with PatelID and related actions
-	PastelID is the base58-encoded public key of the EdDSA448 key pair. EdDSA448 public key is 57 bytes
+Set of commands to deal with PastelID and related actions
+PastelID is the base58-encoded public key of the EdDSA448 key pair. EdDSA448 public key is 57 bytes
 
 Arguments:
 1. &#34;command&#34;        (string or set of strings, required) The command to execute
 
 Available commands:
-  newkey &#34;passphrase&#34;						- Generate new PastelID and associated keys (EdDSA448). Return PastelID base58-encoded
-  													&#34;passphrase&#34; will be used to encrypt the key file
-  importkey &#34;key&#34; &lt;&#34;passphrase&#34;&gt;			- Import private &#34;key&#34; (EdDSA448) as PKCS8 encrypted string in PEM format. Return PastelID base58-encoded
-  													&#34;passphrase&#34; (optional) to decrypt the key for the purpose of validating and returning PastelID
-  													NOTE: without &#34;passphrase&#34; key cannot be validated and if key is bad (not EdDSA448) call to &#34;sign&#34; will fail
-  list											- List all internally stored PastelID and keys.
-  sign &#34;text&#34; &#34;PastelID&#34; &#34;passphrase&#34;	- Sign &#34;text&#34; with the internally stored private key associated with the PastelID.
-  sign-by-key &#34;text&#34; &#34;key&#34; &#34;passphrase&#34;	- Sign &#34;text&#34; with the private &#34;key&#34; (EdDSA448) as PKCS8 encrypted string in PEM format.
-  verify &#34;text&#34; &#34;signature&#34; &#34;PastelID&#34;	- Verify &#34;text&#34;&#39;s &#34;signature&#34; with the PastelID.
+  newkey &#34;passphrase&#34;                                - Generate new PastelID, associated keys (EdDSA448) and LegRoast signing keys.
+                                                       Return PastelID and LegRoast signing public key base58-encoded.
+                                                       &#34;passphrase&#34; will be used to encrypt the key file.
+  importkey &#34;key&#34; &lt;&#34;passphrase&#34;&gt;                     - Import private &#34;key&#34; (EdDSA448) as PKCS8 encrypted string in PEM format. Return PastelID base58-encoded
+                                                       &#34;passphrase&#34; (optional) to decrypt the key for the purpose of validating and returning PastelID.
+  											           NOTE: without &#34;passphrase&#34; key cannot be validated and if key is bad (not EdDSA448) call to &#34;sign&#34; will fail
+  list                                               - List all internally stored PastelIDs and associated keys. 
+  sign &#34;text&#34; &#34;PastelID&#34; &#34;passphrase&#34; (&#34;algorithm&#34;)  - Sign &#34;text&#34; with the internally stored private key associated with the PastelID (algorithm: ed448 or legroast).
+  sign-by-key &#34;text&#34; &#34;key&#34; &#34;passphrase&#34;              - Sign &#34;text&#34; with the private &#34;key&#34; (EdDSA448) as PKCS8 encrypted string in PEM format.
+  verify &#34;text&#34; &#34;signature&#34; &#34;PastelID&#34; (&#34;algorithm&#34;) - Verify &#34;text&#34;&#39;s &#34;signature&#34; with the private key associated with the PastelID (algorithm: ed448 or legroast).
 
 </pre>
             <hr>
@@ -61,6 +62,19 @@ Available commands:
           </p>
         </div>
         <div class="col-4 col-lg-3 col-xl-2">
+          
+            <div class="card">
+              <div class="card-header">
+                Addressindex
+              </div>
+              <div class="card-body">
+                
+                  <a href="getaddressmempool.html">getaddressmempool</a>
+                  <br>
+                
+              </div>
+            </div>
+            <br>
           
             <div class="card">
               <div class="card-header">
@@ -78,6 +92,9 @@ Available commands:
                   <br>
                 
                   <a href="getblockcount.html">getblockcount</a>
+                  <br>
+                
+                  <a href="getblockdeltas.html">getblockdeltas</a>
                   <br>
                 
                   <a href="getblockhash.html">getblockhash</a>
@@ -124,6 +141,9 @@ Available commands:
               <div class="card-body">
                 
                   <a href="getinfo.html">getinfo</a>
+                  <br>
+                
+                  <a href="getmemoryinfo.html">getmemoryinfo</a>
                   <br>
                 
                   <a href="help.html">help</a>
@@ -215,6 +235,9 @@ Available commands:
               <div class="card-body">
                 
                   <a href="chaindata.html">chaindata</a>
+                  <br>
+                
+                  <a href="governance.html">governance</a>
                   <br>
                 
                   <a href="%22ingest%22.html">&#34;ingest&#34;</a>
@@ -482,6 +505,9 @@ Available commands:
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
                   <br>
                 
+                  <a href="z_getnotescount.html">z_getnotescount</a>
+                  <br>
+                
                   <a href="z_getoperationresult.html">z_getoperationresult</a>
                   <br>
                 
@@ -518,7 +544,13 @@ Available commands:
                   <a href="z_sendmany.html">z_sendmany</a>
                   <br>
                 
+                  <a href="z_sendmanywithchangetosender.html">z_sendmanywithchangetosender</a>
+                  <br>
+                
                   <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>
+                  <br>
+                
+                  <a href="z_viewtransaction.html">z_viewtransaction</a>
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>

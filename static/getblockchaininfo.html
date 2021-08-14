@@ -34,31 +34,31 @@
           
             <pre>getblockchaininfo
 Returns an object containing various state info regarding block chain processing.
-
+ 
 Note that when the chain tip is at the last block before a network upgrade activation,
 consensus.chaintip != consensus.nextblock.
 
 Result:
 {
   &#34;chain&#34;: &#34;xxxx&#34;,        (string) current network name as defined in BIP70 (main, test, regtest)
-  &#34;blocks&#34;: xxxxxx,         (numeric) the current number of blocks processed in the server
-  &#34;headers&#34;: xxxxxx,        (numeric) the current number of headers we have validated
+  &#34;blocks&#34;: xxxxxx,       (numeric) the current number of blocks processed in the server
+  &#34;headers&#34;: xxxxxx,      (numeric) the current number of headers we have validated
   &#34;bestblockhash&#34;: &#34;...&#34;, (string) the hash of the currently best block
-  &#34;difficulty&#34;: xxxxxx,     (numeric) the current difficulty
+  &#34;difficulty&#34;: xxxxxx,   (numeric) the current difficulty
   &#34;verificationprogress&#34;: xxxx, (numeric) estimate of verification progress [0..1]
   &#34;chainwork&#34;: &#34;xxxx&#34;     (string) total amount of work in active chain, in hexadecimal
-  &#34;commitments&#34;: xxxxxx,    (numeric) the current number of note commitments in the commitment tree
-  &#34;softforks&#34;: [            (array) status of softforks in progress
+  &#34;commitments&#34;: xxxxxx,  (numeric) the current number of note commitments in the commitment tree
+  &#34;softforks&#34;: [          (array) status of softforks in progress
      {
-        &#34;id&#34;: &#34;xxxx&#34;,        (string) name of softfork
-        &#34;version&#34;: xx,         (numeric) block version
-        &#34;enforce&#34;: {           (object) progress toward enforcing the softfork rules for new-version blocks
+        &#34;id&#34;: &#34;xxxx&#34;,         (string) name of softfork
+        &#34;version&#34;: xx,        (numeric) block version
+        &#34;enforce&#34;: {          (object) progress toward enforcing the softfork rules for new-version blocks
            &#34;status&#34;: xx,       (boolean) true if threshold reached
            &#34;found&#34;: xx,        (numeric) number of blocks with the new version found
            &#34;required&#34;: xx,     (numeric) number of blocks required to trigger
            &#34;window&#34;: xx,       (numeric) maximum size of examined window of recent blocks
         },
-        &#34;reject&#34;: { ... }      (object) progress toward rejecting pre-softfork blocks (same fields as &#34;enforce&#34;)
+        &#34;reject&#34;: { ... }      (object) progress toward rejecting pre-softfork blocks (same fields as \&#34;enforce\&#34;)
      }, ...
   ],
   &#34;upgrades&#34;: {                (object) status of network upgrades
@@ -93,6 +93,19 @@ Examples:
           
             <div class="card">
               <div class="card-header">
+                Addressindex
+              </div>
+              <div class="card-body">
+                
+                  <a href="getaddressmempool.html">getaddressmempool</a>
+                  <br>
+                
+              </div>
+            </div>
+            <br>
+          
+            <div class="card">
+              <div class="card-header">
                 Blockchain
               </div>
               <div class="card-body">
@@ -107,6 +120,9 @@ Examples:
                   <br>
                 
                   <a href="getblockcount.html">getblockcount</a>
+                  <br>
+                
+                  <a href="getblockdeltas.html">getblockdeltas</a>
                   <br>
                 
                   <a href="getblockhash.html">getblockhash</a>
@@ -153,6 +169,9 @@ Examples:
               <div class="card-body">
                 
                   <a href="getinfo.html">getinfo</a>
+                  <br>
+                
+                  <a href="getmemoryinfo.html">getmemoryinfo</a>
                   <br>
                 
                   <a href="help.html">help</a>
@@ -244,6 +263,9 @@ Examples:
               <div class="card-body">
                 
                   <a href="chaindata.html">chaindata</a>
+                  <br>
+                
+                  <a href="governance.html">governance</a>
                   <br>
                 
                   <a href="%22ingest%22.html">&#34;ingest&#34;</a>
@@ -511,6 +533,9 @@ Examples:
                   <a href="z_getnewaddress.html">z_getnewaddress</a>
                   <br>
                 
+                  <a href="z_getnotescount.html">z_getnotescount</a>
+                  <br>
+                
                   <a href="z_getoperationresult.html">z_getoperationresult</a>
                   <br>
                 
@@ -547,7 +572,13 @@ Examples:
                   <a href="z_sendmany.html">z_sendmany</a>
                   <br>
                 
+                  <a href="z_sendmanywithchangetosender.html">z_sendmanywithchangetosender</a>
+                  <br>
+                
                   <a href="z_shieldcoinbase.html">z_shieldcoinbase</a>
+                  <br>
+                
+                  <a href="z_viewtransaction.html">z_viewtransaction</a>
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>

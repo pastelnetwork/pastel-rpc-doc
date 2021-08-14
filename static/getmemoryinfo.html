@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Pastel v1.0.0 RPC Docs - move">
+    <meta name="description" content="Pastel v1.0.0 RPC Docs - getmemoryinfo">
     <meta name="author" content="">
 
-    <title>move - Pastel v1.0.0 RPC Docs</title>
+    <title>getmemoryinfo - Pastel v1.0.0 RPC Docs</title>
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
   <style>
@@ -30,32 +30,26 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>move - Pastel v1.0.0 RPC</h1>
+            <h1>getmemoryinfo - Pastel v1.0.0 RPC</h1>
           
-            <pre>move &#34;fromaccount&#34; &#34;toaccount&#34; amount ( minconf &#34;comment&#34; )
-
-DEPRECATED. Move a specified amount from one account in your wallet to another.
-
-Arguments:
-1. &#34;fromaccount&#34;   (string, required) MUST be set to the empty string &#34;&#34; to represent the default account. Passing any other string will result in an error.
-2. &#34;toaccount&#34;     (string, required) MUST be set to the empty string &#34;&#34; to represent the default account. Passing any other string will result in an error.
-3. amount            (numeric) Quantity of PSL to move between accounts.
-4. minconf           (numeric, optional, default=1) Only use funds with at least this many confirmations.
-5. &#34;comment&#34;       (string, optional) An optional comment, stored in the wallet only.
+            <pre>getmemoryinfo
+Returns an object containing information about memory usage.
 
 Result:
-true|false           (boolean) true if successful.
+{
+  &#34;locked&#34;: {               (json object) Information about locked memory manager
+    &#34;used&#34;: xxxxx,          (numeric) Number of bytes used
+    &#34;free&#34;: xxxxx,          (numeric) Number of bytes available in current arenas
+    &#34;total&#34;: xxxxxxx,       (numeric) Total number of bytes managed
+    &#34;locked&#34;: xxxxxx,       (numeric) Amount of bytes that succeeded locking. If this number is smaller than total, locking pages failed at some point and key data could be swapped to disk.
+    &#34;chunks_used&#34;: xxxxx,   (numeric) Number allocated chunks
+    &#34;chunks_free&#34;: xxxxx,   (numeric) Number unused chunks
+  }
+}
 
 Examples:
-
-Move 0.01 PSL from the default account to the account named tabby
-&gt; pastel-cli move &#34;&#34; &#34;tabby&#34; 0.01
-
-Move 0.01 PSL timotei to akiko with a comment and funds have 6 confirmations
-&gt; pastel-cli move &#34;timotei&#34; &#34;akiko&#34; 0.01 6 &#34;happy birthday!&#34;
-
-As a json rpc call
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;move&#34;, &#34;params&#34;: [&#34;timotei&#34;, &#34;akiko&#34;, 0.01, 6, &#34;happy birthday!&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:9932/
+&gt; pastel-cli getmemoryinfo 
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getmemoryinfo&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:9932/
 
 </pre>
             <hr>
