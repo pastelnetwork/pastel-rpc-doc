@@ -32,11 +32,18 @@
         <div class="col-8 col-lg-9 col-xl-10">
             <h1>getrawtransaction - Pastel RPC</h1>
           
-            <pre>getrawtransaction &#34;txid&#34; ( verbose )
+            <pre>getrawtransaction &#34;txid&#34; ( verbose &#34;blockhash&#34;)
 
 NOTE: By default this function only works sometimes. This is when the tx is in the mempool
 or there is an unspent output in the utxo for this transaction. To make it always work,
 you need to maintain a transaction index, using the -txindex command line option.
+
+NOTE: If &#34;blockhash&#34; is not provided and the -txindex option is not enabled, then this call only
+works for mempool transactions. If either &#34;blockhash&#34; is provided or the -txindex option is
+enabled, it also works for blockchain transactions. If the block which contains the transaction
+is known, its hash can be provided even for nodes without -txindex. Note that if a blockhash is
+provided, only that block will be searched and if the transaction is in the mempool or other
+blocks, or if this node does not have the given block available, the transaction will not be found.
 
 Return the raw transaction data.
 
@@ -45,84 +52,60 @@ If verbose is non-zero, returns an Object with information about &#39;txid&#39;.
 
 Arguments:
 1. &#34;txid&#34;      (string, required) The transaction id
-2. verbose       (numeric, optional, default=0) If 0, return a string, other return a json object
+2. verbose     (numeric, optional, default=0) If 0, return a string, other return a json object
 
 Result (if verbose is not set or set to 0):
-&#34;data&#34;      (string) The serialized, hex-encoded data for &#39;txid&#39;
+  &#34;data&#34;      (string) The serialized, hex-encoded data for &#39;txid&#39;
 
 Result (if verbose &gt; 0):
 {
+  &#34;in_active_chain&#34;: b, (bool) Whether specified block is in the active chain or not (only present with explicit &#34;blockhash&#34; argument)
   &#34;hex&#34; : &#34;data&#34;,       (string) The serialized, hex-encoded data for &#39;txid&#39;
   &#34;txid&#34; : &#34;id&#34;,        (string) The transaction id (same as provided)
-  &#34;version&#34; : n,          (numeric) The version
-  &#34;locktime&#34; : ttt,       (numeric) The lock time
-  &#34;expiryheight&#34; : ttt,   (numeric, optional) The block height after which the transaction expires
-  &#34;vin&#34; : [               (array of json objects)
+  &#34;version&#34; : n,        (numeric) The version
+  &#34;locktime&#34; : ttt,     (numeric) The lock time
+  &#34;expiryheight&#34; : ttt, (numeric, optional) The block height after which the transaction expires
+  &#34;vin&#34; : [             (array of json objects)
      {
        &#34;txid&#34;: &#34;id&#34;,    (string) The transaction id
-       &#34;vout&#34;: n,         (numeric) 
-       &#34;scriptSig&#34;: {     (json object) The script
+       &#34;vout&#34;: n,       (numeric)
+       &#34;scriptSig&#34;: {   (json object) The script
          &#34;asm&#34;: &#34;asm&#34;,  (string) asm
          &#34;hex&#34;: &#34;hex&#34;   (string) hex
        },
-       &#34;sequence&#34;: n      (numeric) The script sequence number
+       &#34;sequence&#34;: n    (numeric) The script sequence number
      }
      ,...
   ],
-  &#34;vout&#34; : [              (array of json objects)
+  &#34;vout&#34; : [                     (array of json objects)
      {
-       &#34;value&#34; : x.xxx,            (numeric) The value in PSL
-       &#34;n&#34; : n,                    (numeric) index
-       &#34;scriptPubKey&#34; : {          (json object)
+       &#34;value&#34; : x.xxx,          (numeric) The value in PSL
+       &#34;n&#34; : n,                  (numeric) index
+       &#34;scriptPubKey&#34; : {        (json object)
          &#34;asm&#34; : &#34;asm&#34;,          (string) the asm
          &#34;hex&#34; : &#34;hex&#34;,          (string) the hex
-         &#34;reqSigs&#34; : n,            (numeric) The required sigs
+         &#34;reqSigs&#34; : n,          (numeric) The required sigs
          &#34;type&#34; : &#34;pubkeyhash&#34;,  (string) The type, eg &#39;pubkeyhash&#39;
-         &#34;addresses&#34; : [           (json array of string)
-           &#34;zcashaddress&#34;          (string) Pastel address
+         &#34;addresses&#34; : [         (json array of string)
+           &#34;z-address&#34;           (string) Pastel address
            ,...
          ]
        }
      }
      ,...
   ],
-  &#34;vjoinsplit&#34; : [        (array of json objects, only for version &gt;= 2)
-     {
-       &#34;vpub_old&#34; : x.xxx,         (numeric) public input value in PSL
-       &#34;vpub_new&#34; : x.xxx,         (numeric) public output value in PSL
-       &#34;anchor&#34; : &#34;hex&#34;,         (string) the anchor
-       &#34;nullifiers&#34; : [            (json array of string)
-         &#34;hex&#34;                     (string) input note nullifier
-         ,...
-       ],
-       &#34;commitments&#34; : [           (json array of string)
-         &#34;hex&#34;                     (string) output note commitment
-         ,...
-       ],
-       &#34;onetimePubKey&#34; : &#34;hex&#34;,  (string) the onetime public key used to encrypt the ciphertexts
-       &#34;randomSeed&#34; : &#34;hex&#34;,     (string) the random seed
-       &#34;macs&#34; : [                  (json array of string)
-         &#34;hex&#34;                     (string) input note MAC
-         ,...
-       ],
-       &#34;proof&#34; : &#34;hex&#34;,          (string) the zero-knowledge proof
-       &#34;ciphertexts&#34; : [           (json array of string)
-         &#34;hex&#34;                     (string) output note ciphertext
-         ,...
-       ]
-     }
-     ,...
-  ],
-  &#34;blockhash&#34; : &#34;hash&#34;,   (string) the block hash
-  &#34;confirmations&#34; : n,      (numeric) The confirmations
-  &#34;time&#34; : ttt,             (numeric) The transaction time in seconds since epoch (Jan 1 1970 GMT)
-  &#34;blocktime&#34; : ttt         (numeric) The block time in seconds since epoch (Jan 1 1970 GMT)
+  &#34;blockhash&#34; : &#34;hash&#34;,          (string) the block hash
+  &#34;confirmations&#34; : n,           (numeric) The confirmations
+  &#34;time&#34; : ttt,                  (numeric) The transaction time in seconds since epoch (Jan 1 1970 GMT)
+  &#34;blocktime&#34; : ttt              (numeric) The block time in seconds since epoch (Jan 1 1970 GMT)
 }
 
-Examples:
+ Examples:
 &gt; pastel-cli getrawtransaction &#34;mytxid&#34;
 &gt; pastel-cli getrawtransaction &#34;mytxid&#34; 1
 &gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getrawtransaction&#34;, &#34;params&#34;: [&#34;mytxid&#34;, 1] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:9932/
+&gt; pastel-cli getrawtransaction &#34;mytxid&#34; 0 &#34;myblockhash&#34;
+&gt; pastel-cli getrawtransaction &#34;mytxid&#34; 1 &#34;myblockhash&#34;
 
 </pre>
             <hr>
@@ -231,22 +214,6 @@ Examples:
           
             <div class="card">
               <div class="card-header">
-                Disclosure
-              </div>
-              <div class="card-body">
-                
-                  <a href="z_getpaymentdisclosure.html">z_getpaymentdisclosure</a>
-                  <br>
-                
-                  <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
-                  <br>
-                
-              </div>
-            </div>
-            <br>
-          
-            <div class="card">
-              <div class="card-header">
                 Generating
               </div>
               <div class="card-body">
@@ -308,6 +275,9 @@ Examples:
               <div class="card-body">
                 
                   <a href="chaindata.html">chaindata</a>
+                  <br>
+                
+                  <a href="getfeeschedule.html">getfeeschedule</a>
                   <br>
                 
                   <a href="governance.html">governance</a>
@@ -575,7 +545,7 @@ Examples:
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
-                  <a href="z_getnewaddress.html">z_getnewaddress</a>
+                  <a href="z_getnewaddress%28type%29.html">z_getnewaddress(type)</a>
                   <br>
                 
                   <a href="z_getnotescount.html">z_getnotescount</a>
@@ -627,18 +597,6 @@ Examples:
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>
-                  <br>
-                
-                  <a href="zcrawjoinsplit.html">zcrawjoinsplit</a>
-                  <br>
-                
-                  <a href="zcrawkeygen.html">zcrawkeygen</a>
-                  <br>
-                
-                  <a href="zcrawreceive.html">zcrawreceive</a>
-                  <br>
-                
-                  <a href="zcsamplejoinsplit.html">zcsamplejoinsplit</a>
                   <br>
                 
               </div>

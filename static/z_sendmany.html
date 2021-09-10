@@ -37,7 +37,6 @@
 Send multiple times. Amounts are decimal numbers with at most 8 digits of precision.
 Change generated from a taddr flows to a new taddr address, while change generated from a zaddr returns to itself.
 When sending coinbase UTXOs to a zaddr, change is not allowed. The entire value of the UTXO(s) must be consumed.
-Before Sapling activates, the maximum number of zaddr outputs is 54 due to transaction size limits.
 
 
 Arguments:
@@ -45,14 +44,14 @@ Arguments:
 2. &#34;amounts&#34;             (array, required) An array of json objects representing the amounts to send.
     [{
       &#34;address&#34;:address  (string, required) The address is a taddr or zaddr
-      &#34;amount&#34;:amount    (numeric, required) The numeric amount in PSL is the value
+      &#34;amount&#34;:amount    (numeric, required) The numeric amount in &#34; &#43; CURRENCY_UNIT &#43; &#34; is the value
       &#34;memo&#34;:memo        (string, optional) If the address is a zaddr, raw data represented in hexadecimal string format
     }, ... ]
 3. minconf               (numeric, optional, default=1) Only use funds confirmed at least this many times.
-4. fee                   (numeric, optional, default=0.10) The fee amount to attach to this transaction.
+4. fee                   (numeric, optional, default=0.10The fee amount to attach to this transaction.
 
 Result:
-&#34;operationid&#34;          (string) An operationid to pass to z_getoperationstatus to get the result of the operation.
+  &#34;operationid&#34;          (string) An operationid to pass to z_getoperationstatus to get the result of the operation.
 
 Examples:
 &gt; pastel-cli z_sendmany &#34;PtczsZ91Bt3oDPDQotzUsrx1wjmsFVgf28n&#34; &#39;[{&#34;address&#34;: &#34;PzSSk8QJFqjo133DoFZvn9wwcCxt5RYeeLFJZRgws6xgJ3LroqRgXKNkhkG3ENmC8oe82UTr3PHcQB9mw7DSLXhyP6atQQ5&#34; ,&#34;amount&#34;: 5.0}]&#39;
@@ -165,22 +164,6 @@ Examples:
           
             <div class="card">
               <div class="card-header">
-                Disclosure
-              </div>
-              <div class="card-body">
-                
-                  <a href="z_getpaymentdisclosure.html">z_getpaymentdisclosure</a>
-                  <br>
-                
-                  <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
-                  <br>
-                
-              </div>
-            </div>
-            <br>
-          
-            <div class="card">
-              <div class="card-header">
                 Generating
               </div>
               <div class="card-body">
@@ -242,6 +225,9 @@ Examples:
               <div class="card-body">
                 
                   <a href="chaindata.html">chaindata</a>
+                  <br>
+                
+                  <a href="getfeeschedule.html">getfeeschedule</a>
                   <br>
                 
                   <a href="governance.html">governance</a>
@@ -509,7 +495,7 @@ Examples:
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
-                  <a href="z_getnewaddress.html">z_getnewaddress</a>
+                  <a href="z_getnewaddress%28type%29.html">z_getnewaddress(type)</a>
                   <br>
                 
                   <a href="z_getnotescount.html">z_getnotescount</a>
@@ -561,18 +547,6 @@ Examples:
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>
-                  <br>
-                
-                  <a href="zcrawjoinsplit.html">zcrawjoinsplit</a>
-                  <br>
-                
-                  <a href="zcrawkeygen.html">zcrawkeygen</a>
-                  <br>
-                
-                  <a href="zcrawreceive.html">zcrawreceive</a>
-                  <br>
-                
-                  <a href="zcsamplejoinsplit.html">zcsamplejoinsplit</a>
                   <br>
                 
               </div>

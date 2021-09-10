@@ -37,30 +37,27 @@
 Returns array of unspent shielded notes with between minconf and maxconf (inclusive) confirmations.
 Optionally filter to only include notes sent to specified addresses.
 When minconf is 0, unspent notes with zero confirmations are returned, even though they are not immediately spendable.
-Results are an array of Objects, each of which has:
-{txid, jsindex, jsoutindex, confirmations, address, amount, memo} (Sprout)
-{txid, outindex, confirmations, address, amount, memo} (Sapling)
+Results are an array of objects, each of which has:
+  { txid, outindex, confirmations, address, amount, memo }
 
 Arguments:
 1. minconf          (numeric, optional, default=1) The minimum confirmations to filter
 2. maxconf          (numeric, optional, default=9999999) The maximum confirmations to filter
 3. includeWatchonly (bool, optional, default=false) Also include watchonly addresses (see &#39;z_importviewingkey&#39;)
-4. &#34;addresses&#34;      (string) A json array of zaddrs (both Sprout and Sapling) to filter on.  Duplicate addresses not allowed.
+4. &#34;addresses&#34;      (string) A json array of Sapling zaddrs to filter on.  Duplicate addresses not allowed.
     [
       &#34;address&#34;     (string) zaddr
       ,...
-    ]
+    ]&#34;
 
 Result
 [                             (array of json object)
   {
-    &#34;txid&#34; : &#34;txid&#34;,          (string) the transaction id 
-    &#34;jsindex&#34; (sprout) : n,       (numeric) the joinsplit index
-    &#34;jsoutindex&#34; (sprout) : n,       (numeric) the output index of the joinsplit
-    &#34;outindex&#34; (sapling) : n,       (numeric) the output index
-    &#34;confirmations&#34; : n,       (numeric) the number of confirmations
-    &#34;spendable&#34; : true|false,  (boolean) true if note can be spent by wallet, false if address is watchonly
-    &#34;address&#34; : &#34;address&#34;,    (string) the shielded address
+    &#34;txid&#34; : &#34;txid&#34;,          (string) the transaction id
+    &#34;outindex&#34; (sapling) : n, (numeric) the output index
+    &#34;confirmations&#34; : n,      (numeric) the number of confirmations
+    &#34;spendable&#34; : true|false, (boolean) true if note can be spent by wallet, false if address is watchonly
+    &#34;address&#34; : &#34;address&#34;,  (string) the shielded address
     &#34;amount&#34;: xxxxx,          (numeric) the amount of value in the note
     &#34;memo&#34;: xxxxx,            (string) hexademical string representation of memo field
     &#34;change&#34;: true|false,     (boolean) true if the address that received the note is also one of the sending addresses
@@ -68,7 +65,7 @@ Result
   ,...
 ]
 
-Examples
+Examples:
 &gt; pastel-cli z_listunspent 
 &gt; pastel-cli z_listunspent 6 9999999 false &#34;[\&#34;Pzb8Ya6owSbT1EWKistVWFAEVXerZLi5nfuar8DqRZ2tkwHgvTP6GT8H6EaFf6wCnY7zwtbtnc7EcTGTfg9GdmNnV2xuYS3\&#34;,\&#34;PzSSk8QJFqjo133DoFZvn9wwcCxt5RYeeLFJZRgws6xgJ3LroqRgXKNkhkG3ENmC8oe82UTr3PHcQB9mw7DSLXhyP6atQQ5\&#34;]&#34;
 &gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;z_listunspent&#34;, &#34;params&#34;: [6 9999999 false &#34;[\&#34;Pzb8Ya6owSbT1EWKistVWFAEVXerZLi5nfuar8DqRZ2tkwHgvTP6GT8H6EaFf6wCnY7zwtbtnc7EcTGTfg9GdmNnV2xuYS3\&#34;,\&#34;PzSSk8QJFqjo133DoFZvn9wwcCxt5RYeeLFJZRgws6xgJ3LroqRgXKNkhkG3ENmC8oe82UTr3PHcQB9mw7DSLXhyP6atQQ5\&#34;]&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:9932/
@@ -180,22 +177,6 @@ Examples
           
             <div class="card">
               <div class="card-header">
-                Disclosure
-              </div>
-              <div class="card-body">
-                
-                  <a href="z_getpaymentdisclosure.html">z_getpaymentdisclosure</a>
-                  <br>
-                
-                  <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
-                  <br>
-                
-              </div>
-            </div>
-            <br>
-          
-            <div class="card">
-              <div class="card-header">
                 Generating
               </div>
               <div class="card-body">
@@ -257,6 +238,9 @@ Examples
               <div class="card-body">
                 
                   <a href="chaindata.html">chaindata</a>
+                  <br>
+                
+                  <a href="getfeeschedule.html">getfeeschedule</a>
                   <br>
                 
                   <a href="governance.html">governance</a>
@@ -524,7 +508,7 @@ Examples
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
-                  <a href="z_getnewaddress.html">z_getnewaddress</a>
+                  <a href="z_getnewaddress%28type%29.html">z_getnewaddress(type)</a>
                   <br>
                 
                   <a href="z_getnotescount.html">z_getnotescount</a>
@@ -576,18 +560,6 @@ Examples
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>
-                  <br>
-                
-                  <a href="zcrawjoinsplit.html">zcrawjoinsplit</a>
-                  <br>
-                
-                  <a href="zcrawkeygen.html">zcrawkeygen</a>
-                  <br>
-                
-                  <a href="zcrawreceive.html">zcrawreceive</a>
-                  <br>
-                
-                  <a href="zcsamplejoinsplit.html">zcsamplejoinsplit</a>
                   <br>
                 
               </div>

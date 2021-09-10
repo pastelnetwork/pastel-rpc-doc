@@ -33,7 +33,7 @@
             <h1>listtransactions - Pastel RPC</h1>
           
             <pre>listtransactions ( &#34;account&#34; count from includeWatchonly)
-
+            
 Returns up to &#39;count&#39; most recent transactions skipping the first &#39;from&#39; transactions for account &#39;account&#39;.
 
 Arguments:
@@ -45,47 +45,46 @@ Arguments:
 Result:
 [
   {
-    &#34;account&#34;:&#34;accountname&#34;,       (string) DEPRECATED. The account name associated with the transaction. 
-                                                It will be &#34;&#34; for the default account.
-    &#34;address&#34;:&#34;zcashaddress&#34;,    (string) The Pastel address of the transaction. Not present for 
-                                                move transactions (category = move).
+    &#34;account&#34;:&#34;accountname&#34;,        (string) DEPRECATED. The account name associated with the transaction.
+                                             It will be &#34;&#34; for the default account.
+    &#34;address&#34;:&#34;zcashaddress&#34;,       (string) The Pastel address of the transaction. Not present for
+                                             move transactions (category = move).
     &#34;category&#34;:&#34;send|receive|move&#34;, (string) The transaction category. &#39;move&#39; is a local (off blockchain)
-                                                transaction between accounts, and not associated with an address,
-                                                transaction id or block. &#39;send&#39; and &#39;receive&#39; transactions are 
-                                                associated with an address, transaction id and block details
-    &#34;amount&#34;: x.xxx,          (numeric) The amount in PSL. This is negative for the &#39;send&#39; category, and for the
-                                         &#39;move&#39; category for moves outbound. It is positive for the &#39;receive&#39; category,
-                                         and for the &#39;move&#39; category for inbound funds.
-    &#34;vout&#34; : n,               (numeric) the vout value
-    &#34;fee&#34;: x.xxx,             (numeric) The amount of the fee in PSL. This is negative and only available for the 
-                                         &#39;send&#39; category of transactions.
-    &#34;confirmations&#34;: n,       (numeric) The number of confirmations for the transaction. Available for &#39;send&#39; and 
-                                         &#39;receive&#39; category of transactions.
-    &#34;blockhash&#34;: &#34;hashvalue&#34;, (string) The block hash containing the transaction. Available for &#39;send&#39; and &#39;receive&#39;
-                                          category of transactions.
+                                             transaction between accounts, and not associated with an address,
+                                             transaction id or block. &#39;send&#39; and &#39;receive&#39; transactions are
+                                             associated with an address, transaction id and block details
+    &#34;amount&#34;: x.xxx,                (numeric) The amount in &#34; &#43; CURRENCY_UNIT &#43; &#34;. This is negative for the &#39;send&#39; category, and for the
+                                              &#39;move&#39; category for moves outbound. It is positive for the &#39;receive&#39; category,
+                                              and for the &#39;move&#39; category for inbound funds.
+    &#34;vout&#34; : n,               (numeric) the vout value\n&#34;
+    &#34;fee&#34;: x.xxx,             (numeric) The amount of the fee in &#34; &#43; CURRENCY_UNIT &#43; &#34;. This is negative and only available for the
+                                        &#39;send&#39; category of transactions.
+    &#34;confirmations&#34;: n,       (numeric) The number of confirmations for the transaction. Available for &#39;send&#39; and
+                                        &#39;receive&#39; category of transactions.
+    &#34;blockhash&#34;: &#34;hashvalue&#34;, (string)  The block hash containing the transaction. Available for &#39;send&#39; and &#39;receive&#39;
+                                        category of transactions.
     &#34;blockindex&#34;: n,          (numeric) The block index containing the transaction. Available for &#39;send&#39; and &#39;receive&#39;
-                                          category of transactions.
-    &#34;txid&#34;: &#34;transactionid&#34;, (string) The transaction id. Available for &#39;send&#39; and &#39;receive&#39; category of transactions.
+                                        category of transactions.
+    &#34;txid&#34;: &#34;transactionid&#34;,  (string)  The transaction id. Available for &#39;send&#39; and &#39;receive&#39; category of transactions.
     &#34;time&#34;: xxx,              (numeric) The transaction time in seconds since epoch (midnight Jan 1 1970 GMT).
-    &#34;timereceived&#34;: xxx,      (numeric) The time received in seconds since epoch (midnight Jan 1 1970 GMT). Available 
-                                          for &#39;send&#39; and &#39;receive&#39; category of transactions.
-    &#34;comment&#34;: &#34;...&#34;,       (string) If a comment is associated with the transaction.
-    &#34;otheraccount&#34;: &#34;accountname&#34;,  (string) For the &#39;move&#39; category of transactions, the account the funds came 
-                                          from (for receiving funds, positive amounts), or went to (for sending funds,
-                                          negative amounts).
+    &#34;timereceived&#34;: xxx,      (numeric) The time received in seconds since epoch (midnight Jan 1 1970 GMT). Available
+                                        for &#39;send&#39; and &#39;receive&#39; category of transactions.
+    &#34;comment&#34;: &#34;...&#34;,         (string)  If a comment is associated with the transaction.
+    &#34;otheraccount&#34;: &#34;accountname&#34;,  (string) For the &#39;move&#39; category of transactions, the account the funds came
+                                             from (for receiving funds, positive amounts), or went to (for sending funds,
+                                             negative amounts).
     &#34;size&#34;: n,                (numeric) Transaction size in bytes
   }
 ]
 
 Examples:
-
-List the most recent 10 transactions in the systems
+List the most recent 10 transactions in the systems:
 &gt; pastel-cli listtransactions 
 
-List transactions 100 to 120
+List transactions 100 to 120:
 &gt; pastel-cli listtransactions &#34;*&#34; 20 100
 
-As a json rpc call
+As a json rpc call:
 &gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;listtransactions&#34;, &#34;params&#34;: [&#34;*&#34;, 20, 100] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:9932/
 
 </pre>
@@ -195,22 +194,6 @@ As a json rpc call
           
             <div class="card">
               <div class="card-header">
-                Disclosure
-              </div>
-              <div class="card-body">
-                
-                  <a href="z_getpaymentdisclosure.html">z_getpaymentdisclosure</a>
-                  <br>
-                
-                  <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
-                  <br>
-                
-              </div>
-            </div>
-            <br>
-          
-            <div class="card">
-              <div class="card-header">
                 Generating
               </div>
               <div class="card-body">
@@ -272,6 +255,9 @@ As a json rpc call
               <div class="card-body">
                 
                   <a href="chaindata.html">chaindata</a>
+                  <br>
+                
+                  <a href="getfeeschedule.html">getfeeschedule</a>
                   <br>
                 
                   <a href="governance.html">governance</a>
@@ -539,7 +525,7 @@ As a json rpc call
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
-                  <a href="z_getnewaddress.html">z_getnewaddress</a>
+                  <a href="z_getnewaddress%28type%29.html">z_getnewaddress(type)</a>
                   <br>
                 
                   <a href="z_getnotescount.html">z_getnotescount</a>
@@ -591,18 +577,6 @@ As a json rpc call
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>
-                  <br>
-                
-                  <a href="zcrawjoinsplit.html">zcrawjoinsplit</a>
-                  <br>
-                
-                  <a href="zcrawkeygen.html">zcrawkeygen</a>
-                  <br>
-                
-                  <a href="zcrawreceive.html">zcrawreceive</a>
-                  <br>
-                
-                  <a href="zcsamplejoinsplit.html">zcsamplejoinsplit</a>
                   <br>
                 
               </div>

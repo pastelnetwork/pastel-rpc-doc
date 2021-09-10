@@ -33,20 +33,17 @@
             <h1>sendrawtransaction - Pastel RPC</h1>
           
             <pre>sendrawtransaction &#34;hexstring&#34; ( allowhighfees )
-
 Submits raw transaction (serialized, hex-encoded) to local node and network.
-
 Also see createrawtransaction and signrawtransaction calls.
 
 Arguments:
 1. &#34;hexstring&#34;    (string, required) The hex string of the raw transaction)
-2. allowhighfees    (boolean, optional, default=false) Allow high fees
+2. allowhighfees  (boolean, optional, default=false) Allow high fees
 
 Result:
-&#34;hex&#34;             (string) The transaction hash in hex
+hex\&#34;             (string) The transaction hash in hex
 
 Examples:
-
 Create a transaction
 &gt; pastel-cli createrawtransaction &#34;[{\&#34;txid\&#34; : \&#34;mytxid\&#34;,\&#34;vout\&#34;:0}]&#34; &#34;{\&#34;myaddress\&#34;:0.01}&#34;
 Sign the transaction, and get back the hex
@@ -165,22 +162,6 @@ As a json rpc call
           
             <div class="card">
               <div class="card-header">
-                Disclosure
-              </div>
-              <div class="card-body">
-                
-                  <a href="z_getpaymentdisclosure.html">z_getpaymentdisclosure</a>
-                  <br>
-                
-                  <a href="z_validatepaymentdisclosure.html">z_validatepaymentdisclosure</a>
-                  <br>
-                
-              </div>
-            </div>
-            <br>
-          
-            <div class="card">
-              <div class="card-header">
                 Generating
               </div>
               <div class="card-body">
@@ -242,6 +223,9 @@ As a json rpc call
               <div class="card-body">
                 
                   <a href="chaindata.html">chaindata</a>
+                  <br>
+                
+                  <a href="getfeeschedule.html">getfeeschedule</a>
                   <br>
                 
                   <a href="governance.html">governance</a>
@@ -509,7 +493,7 @@ As a json rpc call
                   <a href="z_getbalance.html">z_getbalance</a>
                   <br>
                 
-                  <a href="z_getnewaddress.html">z_getnewaddress</a>
+                  <a href="z_getnewaddress%28type%29.html">z_getnewaddress(type)</a>
                   <br>
                 
                   <a href="z_getnotescount.html">z_getnotescount</a>
@@ -561,18 +545,6 @@ As a json rpc call
                   <br>
                 
                   <a href="zcbenchmark.html">zcbenchmark</a>
-                  <br>
-                
-                  <a href="zcrawjoinsplit.html">zcrawjoinsplit</a>
-                  <br>
-                
-                  <a href="zcrawkeygen.html">zcrawkeygen</a>
-                  <br>
-                
-                  <a href="zcrawreceive.html">zcrawreceive</a>
-                  <br>
-                
-                  <a href="zcsamplejoinsplit.html">zcsamplejoinsplit</a>
                   <br>
                 
               </div>

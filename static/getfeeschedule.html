@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=1200px, shrink-to-fit=yes">
-    <meta name="description" content="Pastel RPC Docs - z_shieldcoinbase">
+    <meta name="description" content="Pastel RPC Docs - getfeeschedule">
     <meta name="author" content="Pastel Network">
 
-    <title>z_shieldcoinbase - Pastel RPC Documentation</title>
+    <title>getfeeschedule - Pastel RPC Documentation</title>
     <link href="./bootstrap.min.css" rel="stylesheet">
   </head>
   <style>
@@ -30,34 +30,20 @@
 
       <div class="row">
         <div class="col-8 col-lg-9 col-xl-10">
-            <h1>z_shieldcoinbase - Pastel RPC</h1>
+            <h1>getfeeschedule - Pastel RPC</h1>
           
-            <pre>z_shieldcoinbase &#34;fromaddress&#34; &#34;tozaddress&#34; ( fee ) ( limit )
-
-Shield transparent coinbase funds by sending to a shielded zaddr.  This is an asynchronous operation and utxos
-selected for shielding will be locked.  If there is an error, they are unlocked.  The RPC call `listlockunspent`
-can be used to return a list of locked utxos.  The number of coinbase utxos selected for shielding can be limited
-by the caller. Any limit is constrained by the consensus rule defining a maximum
-transaction size of 100000 bytes before Sapling, and 2000000 bytes once Sapling activates.
-
-Arguments:
-1. &#34;fromaddress&#34;         (string, required) The address is a taddr or &#34;*&#34; for all taddrs belonging to the wallet.
-2. &#34;toaddress&#34;           (string, required) The address is a zaddr.
-3. fee                   (numeric, optional, default=0.10) The fee amount to attach to this transaction.
-4. limit                 (numeric, optional, default=50) Limit on the maximum number of utxos to shield.  Set to 0 to use as many as will fit in the transaction.
+            <pre>getfeeschedule
+Returns chain deflation rate &#43; related fees
 
 Result:
 {
-  &#34;remainingUTXOs&#34;: xxx       (numeric) Number of coinbase utxos still available for shielding.
-  &#34;remainingValue&#34;: xxx       (numeric) Value of coinbase utxos still available for shielding.
-  &#34;shieldingUTXOs&#34;: xxx        (numeric) Number of coinbase utxos being shielded.
-  &#34;shieldingValue&#34;: xxx        (numeric) Value of coinbase utxos being shielded.
-  &#34;opid&#34;: xxx          (string) An operationid to pass to z_getoperationstatus to get the result of the operation.
-}
-
-Examples:
-&gt; pastel-cli z_shieldcoinbase &#34;PtczsZ91Bt3oDPDQotzUsrx1wjmsFVgf28n&#34; &#34;PzSSk8QJFqjo133DoFZvn9wwcCxt5RYeeLFJZRgws6xgJ3LroqRgXKNkhkG3ENmC8oe82UTr3PHcQB9mw7DSLXhyP6atQQ5&#34;
-&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;z_shieldcoinbase&#34;, &#34;params&#34;: [&#34;PtczsZ91Bt3oDPDQotzUsrx1wjmsFVgf28n&#34;, &#34;PzSSk8QJFqjo133DoFZvn9wwcCxt5RYeeLFJZRgws6xgJ3LroqRgXKNkhkG3ENmC8oe82UTr3PHcQB9mw7DSLXhyP6atQQ5&#34;] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:9932/
+    &#34;fee_deflation_rate&#34;          : x.xxx,
+    &#34;pastelid_registration_fee&#34;   : x.xxx,
+    &#34;username_registration_fee&#34;   : x.xxx,
+    &#34;username_change_fee&#34;         : x.xxx,
+},
+&gt; pastel-cli getfeeschedule 
+&gt; curl --user myusername --data-binary &#39;{&#34;jsonrpc&#34;: &#34;1.0&#34;, &#34;id&#34;:&#34;curltest&#34;, &#34;method&#34;: &#34;getfeeschedule&#34;, &#34;params&#34;: [] }&#39; -H &#39;content-type: text/plain;&#39; http://127.0.0.1:9932/
 
 </pre>
             <hr>
